@@ -13,7 +13,7 @@
 ### Run the second code cell to organize the data
 
 # STEP 3: Open the R Script (Spillover_Evaluation_Analysis_FINAL.R)
-## STEP 3 is required to visualize and analyze the data. This R Script was edited and run in R Studio
+## STEP 3 is required to visualize and analyze the data. This R Script was edited and run in R Studio.
 ### Set working directory
 ### Load Data
 ### Run code to reproduce Figures 1, 2a, 2b, and 3
