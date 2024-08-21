@@ -9,7 +9,7 @@
 ### STEP 1 is required to obtain the original data as provided by the Spillover: Viral Risk Ranking tool. 
 
 # STEP 2: Open the Jupyter Notebook (Spillover_Organization.ipynb)
-##This Jupyter Notebook was edited and run in Google Colab.
+## This Jupyter Notebook was edited and run in Google Colab.
 #Upload the SpilloverRankings.csv as directed in the first code cell
 #Run the second code cell to organize the data
 
