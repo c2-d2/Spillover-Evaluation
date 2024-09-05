@@ -1,5 +1,5 @@
 # Set Working Directory
-setwd("/Users/katherinebudeski/Documents/Risk Ranking Spillover Tool")
+setwd("INSERT PATH")
 
 # Load libraries
 library(tidyverse)
@@ -106,7 +106,7 @@ ggplot(plot_spillover_clean, aes(x = NormalizedOriginalScores, y = NormalizedAdj
   theme_minimal()
 
 ### FIGURE 2.A. Violin Plots for Normalized Original and Adjusted Scores by Human Virus Classification
-  # the "Human Virus?" factor is designated in the SpillOver: Viral Risk Ranking online tool 
+  # The "Human Virus?" factor is designated in the SpillOver: Viral Risk Ranking online tool 
 
 plot_spillover_long <- plot_spillover %>%
   pivot_longer(cols = starts_with("Normalized"), names_to = "ScoreType", values_to = "Score") %>%
@@ -164,7 +164,7 @@ print(paste("AUC for Original Scores: ", round(auc_original, 2)))
 print(paste("AUC for Adjusted Scores: ", round(auc_adjusted, 2)))
 
 ### FIGURE 3. Mean Weighted Scores and SDs for the human and non-human viruses for all factors 
-  # the human and non-human viruses were designated by the "Human Virus?" column in the SpillOver: Viral Risk Ranking online tool 
+  # The human and non-human viruses were designated by the "Human Virus?" column in the SpillOver: Viral Risk Ranking online tool 
 
 # Combine green and red factors
 all_factors <- c(green, red)
