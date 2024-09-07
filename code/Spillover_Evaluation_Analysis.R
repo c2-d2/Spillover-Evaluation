@@ -90,16 +90,16 @@ library(extrafont)
 font_import()
 fonts()  
 
-### FIGURE 1. Normalized Original vs. Adjusted Scores by Virus Genus and Family
+### FIGURE 1. Normalized Original vs. Adjusted Scores by Virus Family
 
-# Remove rows with missing values for 'Genus' and 'Family'
+# Remove rows with missing values for 'Family'
 plot_spillover_clean <- plot_spillover %>%
-  filter(!is.na(NormalizedOriginalScores), !is.na(NormalizedAdjustedScores), !is.na(VirusGenus), !is.na(VirusFamily))
+  filter(!is.na(NormalizedOriginalScores), !is.na(NormalizedAdjustedScores), !is.na(VirusFamily))
 
 # Create custom shapes
 custom_shapes <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
 
-# Plot the Normalized Original vs. Adjusted Scores by Viral Genus and Family
+# Plot the Normalized Original vs. Adjusted Scores by Viral Family
 ggplot(plot_spillover_clean, aes(x = NormalizedOriginalScores, y = NormalizedAdjustedScores, color = VirusFamily, shape = VirusFamily)) +
   geom_point(size = 3) +
   scale_shape_manual(values = custom_shapes) +
