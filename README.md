@@ -1,4 +1,4 @@
-# Evaluating Viral Risk Ranking Tool for Use of Spillover Dependent Factors
+# Focusing Viral Risk Ranking Tool on Prediction
 ## The following workflow is provided to take users through a three part process of maintaining, organizing, and analyzing the "Spillover Rankings" as provided by the SpillOver: Viral Risk Ranking tool. 
 
 # STEP 1: Download CSV File from Spillover Global Website
