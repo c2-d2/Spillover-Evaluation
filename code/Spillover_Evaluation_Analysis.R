@@ -1,7 +1,7 @@
 # Set Working Directory
 setwd("INSERT PATH")
 
-# Load libraries
+# Load Libraries
 library(tidyverse)
 library(dplyr)
 
@@ -85,6 +85,11 @@ bottom_10_original <- plot_spillover %>% arrange(NormalizedOriginalScores) %>% h
 top_10_adjusted <- plot_spillover %>% arrange(desc(NormalizedAdjustedScores)) %>% head(10)
 bottom_10_adjusted <- plot_spillover %>% arrange(NormalizedAdjustedScores) %>% head(10)
 
+# Load fonts for graphing
+library(extrafont)
+font_import()
+fonts()  
+
 ### FIGURE 1. Normalized Original vs. Adjusted Scores by Virus Genus and Family
 
 # Remove rows with missing values for 'Genus' and 'Family'
@@ -95,15 +100,16 @@ plot_spillover_clean <- plot_spillover %>%
 custom_shapes <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
 
 # Plot the Normalized Original vs. Adjusted Scores by Viral Genus and Family
-ggplot(plot_spillover_clean, aes(x = NormalizedOriginalScores, y = NormalizedAdjustedScores, color = VirusGenus, shape = VirusFamily)) +
+ggplot(plot_spillover_clean, aes(x = NormalizedOriginalScores, y = NormalizedAdjustedScores, color = VirusFamily, shape = VirusFamily)) +
   geom_point(size = 3) +
   scale_shape_manual(values = custom_shapes) +
-  labs(title = "Normalized Original vs. Adjusted Scores by Viral Genus and Family",
+  labs(title = "Normalized Original vs. Adjusted Scores by Viral Family",
        x = "Normalized Original Scores",
        y = "Normalized Adjusted Scores",
-       color = "Viral Genus",
+       color = "Viral Family",
        shape = "Viral Family") +
-  theme_minimal()
+  theme_minimal()+
+  theme(text=element_text(family="Times New Roman", face="bold"))
 
 ### FIGURE 2.A. Violin Plots for Normalized Original and Adjusted Scores by Human Virus Classification
   # The "Human Virus?" factor is designated in the SpillOver: Viral Risk Ranking online tool 
@@ -114,7 +120,7 @@ plot_spillover_long <- plot_spillover %>%
 
 # Violin Plots for Adjusted & Original Scores (side-by-side)
 
-# Load library
+# Load Library
 library(gridExtra)
 
 ggplot(plot_spillover_long, aes(x = HumanVirus, y = Score,  color=HumanVirus)) +
@@ -125,10 +131,11 @@ ggplot(plot_spillover_long, aes(x = HumanVirus, y = Score,  color=HumanVirus)) +
        x = "Human Virus",
        y = "Scores",
        color = "Human Virus Classification") +
-  theme_minimal()
+  theme_minimal()+
+  theme(text=element_text(family="Times New Roman", face="bold"))
 
 ### FIGURE 2.B. ROC Curve for "Human Virus?" Factor
-  # the "Human Virus?" factor is designated in the SpillOver: Viral Risk Ranking online tool
+  # The "Human Virus?" factor is designated in the SpillOver: Viral Risk Ranking online tool
 
 # Load library
 library(pROC)
@@ -140,12 +147,15 @@ plot_spillover$HumanVirusBinary <- ifelse(plot_spillover$HumanVirus == "Yes", 1,
 scores_data <- plot_spillover %>%
   select(HumanVirusBinary, NormalizedOriginalScores, NormalizedAdjustedScores)
 
+# Change Font
+par(family = "serif", font = 2)
+
 # Plot ROC for Normalized Original Scores
 roc_original <- roc(scores_data$HumanVirusBinary, scores_data$NormalizedOriginalScores, 
                     plot = TRUE, 
                     col = "lightgreen", 
                     main = "ROC Curves for Normalized Original and Adjusted Scores by Human Virus Classification",
-                    cex.main = 0.85)
+                    cex.main = 1)
 
 # Add ROC Plot for Normalized Original Scores
 roc_adjusted <- roc(scores_data$HumanVirusBinary, scores_data$NormalizedAdjustedScores, 
@@ -164,7 +174,7 @@ print(paste("AUC for Original Scores: ", round(auc_original, 2)))
 print(paste("AUC for Adjusted Scores: ", round(auc_adjusted, 2)))
 
 ### FIGURE 3. Mean Weighted Scores and SDs for the human and non-human viruses for all factors 
-  # The human and non-human viruses were designated by the "Human Virus?" column in the SpillOver: Viral Risk Ranking online tool 
+  # the human and non-human viruses were designated by the "Human Virus?" column in the SpillOver: Viral Risk Ranking online tool 
 
 # Combine green and red factors
 all_factors <- c(green, red)
@@ -198,5 +208,6 @@ ggplot(mean_sd_all, aes(x = Variable, y = Mean, color = HumanVirus, shape = Type
        y = "Mean Weighted Score & Standard Deviation",
        color = "Human Virus",
        shape = "Factor Type") +
-  theme_minimal()
+  theme_minimal()+
+  theme(text=element_text(family="Times New Roman", face="bold"), axis.text.y = element_text(size = 9.5), legend.position = "bottom")
 
